@@ -14,10 +14,6 @@ extension float2: sizeable { }
 extension float3: sizeable { }
 extension float4: sizeable { }
 
-struct Material: sizeable {
-    var color: float4 = float4(0.25)
-}
-
 struct Vertex: sizeable {
     var position: float3
 }
