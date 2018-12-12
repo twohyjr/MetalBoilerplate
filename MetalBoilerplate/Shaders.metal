@@ -2,19 +2,17 @@
 using namespace metal;
 
 struct VertexIn {
-    float3 position;
+    float3 position [[ attribute(0) ]];
 };
 
 struct VertexOut {
     float4 position [[position]];
 };
 
-vertex VertexOut vertex_shader(device VertexIn *vertices [[buffer(0)]],
-                               uint vertexId [[vertex_id]]) {
-    float3 position = vertices[vertexId].position;
-    
+vertex VertexOut vertex_shader( VertexIn vertexIn [[ stage_in ]]) {
+
     VertexOut vOut;
-    vOut.position = float4(position, 1.0);
+    vOut.position = float4(vertexIn.position, 1.0);
     
     return vOut;
 }

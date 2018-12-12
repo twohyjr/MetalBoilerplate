@@ -5,6 +5,17 @@ class Renderer: NSObject {
     var mesh: Mesh!
     
     var renderPipelineState: MTLRenderPipelineState!
+    var vertexDescriptor: MTLVertexDescriptor {
+        let vertexDescriptor = MTLVertexDescriptor()
+        
+        vertexDescriptor.attributes[0].bufferIndex = 0
+        vertexDescriptor.attributes[0].format = .float3
+        vertexDescriptor.attributes[0].offset = 0
+        
+        vertexDescriptor.layouts[0].stride = Vertex.stride
+        
+        return vertexDescriptor
+    }
 
     override init() {
         super.init()
@@ -27,6 +38,7 @@ class Renderer: NSObject {
         pipelineDescriptor.fragmentFunction = fragmentFunction
         pipelineDescriptor.colorAttachments[0].pixelFormat = Settings.ViewPixelFormat
         pipelineDescriptor.depthAttachmentPixelFormat = Settings.ViewDepthStencilPixelFormat
+        pipelineDescriptor.vertexDescriptor = vertexDescriptor
         
         do {
             return try Engine.Device.makeRenderPipelineState(descriptor: pipelineDescriptor)
@@ -34,6 +46,7 @@ class Renderer: NSObject {
             return nil
         }
     }
+
 }
 
 extension Renderer: MTKViewDelegate {
