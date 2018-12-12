@@ -1,5 +1,7 @@
 import simd
 
+//The types defined here are defined in metal as well
+
 protocol sizeable{ }
 extension sizeable{
     static var size: Int{ return MemoryLayout<Self>.size }

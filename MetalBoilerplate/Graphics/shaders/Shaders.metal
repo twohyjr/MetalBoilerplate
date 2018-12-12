@@ -9,7 +9,7 @@ struct VertexOut {
     float4 position [[position]];
 };
 
-vertex VertexOut vertex_shader( VertexIn vertexIn [[ stage_in ]]) {
+vertex VertexOut basic_vertex_shader( VertexIn vertexIn [[ stage_in ]]) {
 
     VertexOut vOut;
     vOut.position = float4(vertexIn.position, 1.0);
@@ -17,7 +17,7 @@ vertex VertexOut vertex_shader( VertexIn vertexIn [[ stage_in ]]) {
     return vOut;
 }
 
-fragment half4 fragment_shader(VertexOut vertexIn [[stage_in]]) {
+fragment half4 basic_fragment_shader(VertexOut vertexIn [[stage_in]]) {
     float4 color = float4(1, 0, 0, 1);
 
     return half4(color.r, color.g, color.b, color.a);
