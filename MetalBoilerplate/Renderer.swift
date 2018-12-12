@@ -65,14 +65,19 @@ extension Renderer: MTKViewDelegate {
         GameTime.UpdateTime(timeStep)
         
         let commandBuffer = Engine.CommandQueue.makeCommandBuffer()
+        commandBuffer?.label = "Base Command Buffer"
+        
         let renderCommandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: passDescriptor)
+        renderCommandEncoder?.label = "Primary Render Command Encoder"
+        
         renderCommandEncoder?.pushDebugGroup("Draw Mesh")
         
         renderCommandEncoder?.setRenderPipelineState(renderPipelineState)
-
+        
         mesh.drawPrimitives(renderCommandEncoder!)
         
         renderCommandEncoder?.popDebugGroup()
+        
         renderCommandEncoder?.endEncoding()
         commandBuffer?.present(drawable)
         commandBuffer?.commit()
